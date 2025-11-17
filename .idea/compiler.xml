@@ -10,6 +10,7 @@
         <module name="maven-project02" />
         <module name="maven-project03" />
         <module name="springboot-webquickstart" />
+        <module name="aliyun-web-quickstart" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
