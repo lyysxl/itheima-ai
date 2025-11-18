@@ -1,16 +1,19 @@
 package com.itheima.springbootweb01.service.impl;
 
 import com.itheima.springbootweb01.dao.UserDao;
-import com.itheima.springbootweb01.dao.impl.UserDaoImpl;
 import com.itheima.springbootweb01.pojo.User;
 import com.itheima.springbootweb01.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+@Component
 public class UserServiceImpl implements UserService {
-    private final UserDao userDao = new UserDaoImpl();
+    @Autowired
+    private UserDao userDao;
 
     @Override
     public List<User> findAll() {
