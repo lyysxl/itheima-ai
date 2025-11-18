@@ -28,8 +28,8 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="springboot-web-01" options="-parameters" />
-      <module name="springboot-webquickstart" options="-parameters" />
+      <module name="springboot-web-01" options="" />
+      <module name="springboot-webquickstart" options="" />
     </option>
   </component>
 </project>
