@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    #配置数据源连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    #配置数据库
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/web_ai?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: qwe123
+
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 配置项: map-underscore-to-camel-case
+    # 功能描述: 控制是否将下划线命名风格转换为驼峰命名风格
+    # 参数说明:
+    #   true - 启用转换，将下划线分隔的字段名转换为驼峰式命名
+    #   false - 禁用转换，保持原始字段命名风格
+    # 默认值: 无默认值，需显式配置
+    # 使用场景: 数据库字段名与Java实体类属性名的自动映射转换
+    # 注意事项: 该配置通常用于ORM框架或JSON序列化框架中
+    map-underscore-to-camel-case: true
+
+  mapper-locations: classpath:mapper/*.xml

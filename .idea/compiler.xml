@@ -13,26 +13,30 @@
         <module name="aliyun-web-quickstart" />
         <module name="aliyun-mybatis-quickstart" />
       </profile>
-      <profile name="Annotation profile for springboot-mybatis-quickstart" enabled="true">
+      <profile name="Annotation profile for tlias-web-management" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="D:/apache-maven-3.9.11/mvn_repo/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
+          <entry name="D:/apache-maven-3.9.11/mvn_reop/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
         </processorPath>
+        <module name="tlias-web-management" />
         <module name="springboot-web-01" />
         <module name="springboot-mybatis-quickstart" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="itheima-ai" target="1.8" />
+      <module name="springboot-mybatis-tlias" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="springboot-mybatis-quickstart" options="-parameters" />
+      <module name="springboot-mybatis-tlias" options="-parameters" />
       <module name="springboot-web-01" options="-parameters" />
       <module name="springboot-webquickstart" options="-parameters" />
+      <module name="tlias-web-management" options="-parameters" />
     </option>
   </component>
 </project>
