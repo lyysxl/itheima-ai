@@ -10,7 +10,6 @@ public interface UserMapper {
     /**
      * 查询所有用户信息
      */
-    @Select("select id, username, password, name, age from user")
     List<User> findAll();
 
     /**
