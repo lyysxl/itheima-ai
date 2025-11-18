@@ -1,6 +1,6 @@
-package com.itheima.springbootmybatisquickstart.mapper;
+package com.itheima.aliyunmybatisquickstart.mapper;
 
-import com.itheima.springbootmybatisquickstart.pojo.User;
+import com.itheima.aliyunmybatisquickstart.pojo.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -35,6 +35,7 @@ public interface UserMapper {
      * 根据用户名和密码查询用户信息
      */
     @Select("select * from user where username = #{username} and password = #{password}")
-//    User findByUserAndPassword(@Param("username") String username, @Param("password") String password);
-    User findByUserAndPassword(String username, String password);
+    // 阿里云脚手架配置的需要添加@Param注解
+    User findByUserAndPassword(@Param("username") String username, @Param("password") String password);
+//    User findByUserAndPassword(String username, String password);
 }

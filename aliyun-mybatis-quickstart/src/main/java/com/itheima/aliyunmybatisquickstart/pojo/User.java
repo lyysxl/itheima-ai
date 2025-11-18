@@ -1,4 +1,4 @@
-package com.itheima.springbootmybatisquickstart.pojo;
+package com.itheima.aliyunmybatisquickstart.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

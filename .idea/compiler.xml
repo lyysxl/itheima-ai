@@ -11,6 +11,7 @@
         <module name="maven-project03" />
         <module name="springboot-webquickstart" />
         <module name="aliyun-web-quickstart" />
+        <module name="aliyun-mybatis-quickstart" />
       </profile>
       <profile name="Annotation profile for springboot-mybatis-quickstart" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
