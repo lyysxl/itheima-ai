@@ -1,13 +1,15 @@
 package com.itheima.tliaswebmanagement;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 public class LogTest {
-    private final Logger log = LoggerFactory.getLogger(LogTest.class);
+//    private final Logger log = LoggerFactory.getLogger(LogTest.class);
     @Test
     public void testLog(){
         log.debug("开始计算...");
