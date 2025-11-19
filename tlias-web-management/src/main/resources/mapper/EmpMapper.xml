@@ -3,10 +3,47 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itheima.tliaswebmanagement.mapper.EmpMapper">
+    <!--
+        统计员工总数
+        @return 员工总记录数
+    -->
     <select id="count" resultType="java.lang.Long">
         select count(*) from emp e left join dept d on e.dept_id = d.id
     </select>
+
+    <!--
+        分页查询员工列表信息
+        @param start 起始记录位置
+        @param pageSize 每页显示记录数
+        @return 员工信息列表，包含部门名称
+    -->
     <select id="list" resultType="com.itheima.tliaswebmanagement.pojo.Emp">
         select e.*, d.name dept_name from emp e left join dept d on e.dept_id = d.id order by update_time desc limit #{start},#{pageSize}
     </select>
+
+    <!--
+        分页查询员工信息列表
+        @param 无
+        @return 员工信息列表，包含员工基本信息和所属部门名称
+    -->
+    <select id="listPageHelper" resultType="com.itheima.tliaswebmanagement.pojo.Emp">
+        <!-- 关联查询员工表和部门表，按更新时间倒序排列 -->
+        select e.*, d.name dept_name from emp e left join dept d on e.dept_id = d.id
+            <where>
+                <if test="name != null and name != ''">
+                    and e.name like concat('%', #{name}, '%')
+                </if>
+                <if test="gender != null">
+                    and e.gender = #{gender}
+                </if>
+                <if test="begin != null">
+                    and e.entry_date <![CDATA[>=]]> #{begin}
+                </if>
+                <if test="end != null">
+                    and e.entry_date <![CDATA[<=]]> #{end}
+                </if>
+            </where>
+        order by update_time desc
+    </select>
+
 </mapper>

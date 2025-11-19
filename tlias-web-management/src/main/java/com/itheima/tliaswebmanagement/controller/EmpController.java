@@ -1,6 +1,7 @@
 package com.itheima.tliaswebmanagement.controller;
 
 import com.itheima.tliaswebmanagement.pojo.Emp;
+import com.itheima.tliaswebmanagement.pojo.EmpQueryParam;
 import com.itheima.tliaswebmanagement.pojo.PageResult;
 import com.itheima.tliaswebmanagement.pojo.Result;
 import com.itheima.tliaswebmanagement.service.EmpService;
@@ -8,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -24,15 +24,16 @@ public class EmpController {
 
     /**
      * 分页查询员工信息
-     * @param page 当前页码
-     * @param pageSize 每页显示记录数
+     *
+     * @param empQueryParam 员工查询参数对象，包含页码和每页记录数等信息
      * @return 包含分页结果的统一响应对象
      */
     @GetMapping
-    public Result page(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer pageSize) {
-        log.info("分页查询，参数：page={},pageSize={}", page, pageSize);
+    public Result page(EmpQueryParam empQueryParam) {
+        log.info("分页查询，参数：page={},pageSize={}", empQueryParam.getPage(), empQueryParam.getPageSize());
         // 调用服务层执行分页查询
-        PageResult<Emp> pageResult = empService.page(page, pageSize);
+        PageResult<Emp> pageResult = empService.page(empQueryParam);
         return Result.success(pageResult);
     }
+
 }
