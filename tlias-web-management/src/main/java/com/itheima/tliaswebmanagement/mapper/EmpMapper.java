@@ -50,6 +50,13 @@ public interface EmpMapper {
      */
     int insert(Emp emp);
 
+    /**
+     * 根据员工ID查询员工信息
+     * @param id 员工ID，不能为空
+     * @return 返回对应的员工对象，如果未找到则返回null
+     */
+    Emp selectById(Integer id);
+
 }
 
 

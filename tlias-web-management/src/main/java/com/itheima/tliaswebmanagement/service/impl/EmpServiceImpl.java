@@ -86,5 +86,21 @@ public class EmpServiceImpl implements EmpService {
             empLogService.insertLog(empLog);
         }
     }
+    /**
+     * 根据员工ID查询员工信息及其表达式列表
+     * @param empId 员工ID
+     * @return 员工信息对象，包含员工基本信息和表达式列表
+     */
+    @Override
+    public Emp selectById(Integer empId) {
+        // 查询员工基本信息
+        Emp emp = empMapper.selectById(empId);
+        // 查询员工对应的表达式列表
+        List<EmpExpr> exprList = empExprMapper.selectByEmpId(empId);
+        // 将表达式列表设置到员工对象中
+        emp.setExprList(exprList);
+        return emp;
+    }
+
 }
 

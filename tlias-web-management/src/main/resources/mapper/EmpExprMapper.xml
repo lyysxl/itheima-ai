@@ -3,7 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itheima.tliaswebmanagement.mapper.EmpExprMapper">
-
+    <!--
+        批量插入员工工作经历信息
+        @param exprList 员工工作经历对象列表，包含员工ID、开始时间、结束时间、公司名称、职位信息
+        @return 插入成功的记录数
+    -->
     <insert id="insertBatch">
         insert into emp_expr(emp_id, begin, end, company, job)
         values
@@ -11,4 +15,16 @@
             (#{expr.empId}, #{expr.begin}, #{expr.end}, #{expr.company}, #{expr.job})
         </foreach>
     </insert>
+
+    <!--
+        根据员工ID查询工作经历信息
+        @param empId 员工ID
+        @return 员工工作经历信息列表，包含员工ID、开始时间、结束时间、公司名称、职位信息
+    -->
+    <select id="selectByEmpId" resultType="com.itheima.tliaswebmanagement.pojo.EmpExpr">
+        select emp_id, begin, end, company, job
+        from emp_expr
+        where emp_id = #{empId}
+    </select>
+
 </mapper>

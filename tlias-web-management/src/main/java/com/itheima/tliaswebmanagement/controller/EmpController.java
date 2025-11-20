@@ -68,4 +68,17 @@ public class EmpController {
         return empService.insert(emp) > 0 ? Result.success() : Result.error("添加失败");
     }
 
+    /**
+     * 根据员工ID查询员工详情
+     * @param empId 员工ID
+     * @return 员工信息查询结果
+     */
+    @GetMapping("{id}")
+    public Result selectById(@PathVariable("id") Integer empId) {
+        log.info("执行根据ID查询员工详情操作，员工ID: {}", empId);
+        // 根据ID查询员工信息
+        Emp emp = empService.selectById(empId);
+        return Result.success(emp);
+    }
+
 }

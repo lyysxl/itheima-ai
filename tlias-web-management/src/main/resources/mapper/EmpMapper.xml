@@ -59,8 +59,35 @@
         </foreach>
     </delete>
 
+    <!--
+        插入员工信息
+        @param username 用户名
+        @param password 密码
+        @param name 员工姓名
+        @param gender 性别
+        @param phone 手机号
+        @param job 职位
+        @param salary 薪资
+        @param image 头像图片路径
+        @param entryDate 入职日期
+        @param deptId 部门ID
+        @param createTime 创建时间
+        @param updateTime 更新时间
+        @return 生成的主键ID
+    -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into emp(username, password, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time)
         values(#{username}, #{password}, #{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})
     </insert>
+
+
+    <!--
+        根据ID查询员工信息
+        @param id 员工ID
+        @return Emp 员工对象
+    -->
+    <select id="selectById" resultType="com.itheima.tliaswebmanagement.pojo.Emp">
+        select id, username, password, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time from emp where id = #{id}
+    </select>
+
 </mapper>

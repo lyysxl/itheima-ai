@@ -35,4 +35,12 @@ public interface EmpService {
      */
     int insert(Emp emp) throws Exception;
 
+    /**
+     * 根据员工ID查询员工信息
+     *
+     * @param empId 员工ID，不能为空
+     * @return 返回对应ID的员工对象，如果未找到则返回null
+     */
+    Emp selectById(Integer empId);
+
 }
