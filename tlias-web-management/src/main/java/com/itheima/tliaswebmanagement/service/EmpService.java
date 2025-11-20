@@ -33,6 +33,6 @@ public interface EmpService {
      * @param emp 要插入的员工对象
      * @return 插入成功的记录数量
      */
-    int insert(Emp emp);
+    int insert(Emp emp) throws Exception;
 
 }

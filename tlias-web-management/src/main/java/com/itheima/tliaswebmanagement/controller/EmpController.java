@@ -54,9 +54,18 @@ public class EmpController {
         return Result.success(count);
     }
 
+    /**
+     * 保存员工信息
+     * @param emp 员工对象，包含员工的基本信息
+     * @return Result 操作结果，成功返回success，失败返回error信息
+     * @throws Exception 抛出异常
+     */
     @PostMapping
-    public Result save(@RequestBody Emp emp) {
+    public Result save(@RequestBody Emp emp) throws Exception {
+        // 记录保存员工信息的操作日志
         log.info("执行保存员工信息操作，员工信息：{}", emp);
+        // 调用服务层插入员工信息，根据返回结果判断操作是否成功
         return empService.insert(emp) > 0 ? Result.success() : Result.error("添加失败");
     }
+
 }
