@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: tlias-web-manager
   datasource:
     #配置数据源连接池
     type: com.alibaba.druid.pool.DruidDataSource
@@ -7,6 +9,15 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/web_ai?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
     username: root
     password: qwe123
+  # 配置Servlet容器的文件上传参数
+  # 该配置用于设置HTTP请求中multipart类型数据的处理限制
+  #
+  # max-file-size: 单个上传文件的最大大小限制，超过此限制将抛出异常
+  # max-request-size: 整个HTTP请求的最大大小限制，包括所有文件和表单数据
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
 
 
 mybatis:
@@ -28,3 +39,4 @@ mybatis:
 logging:
   level:
     org.springframework.jdbc.support.JdbcTransactionManager: debug
+
