@@ -27,4 +27,42 @@
         where emp_id = #{empId}
     </select>
 
+    <!--
+        根据员工ID更新工作经历信息
+        @param empId 员工ID
+        @param begin 工作开始时间
+        @param end 工作结束时间
+        @param company 公司名称
+        @param job 职位信息
+        @return 更新的记录数
+    -->
+    <update id="updateById">
+        update emp_expr
+        <set>
+            <if test="begin != null">
+                begin = #{begin},
+            </if>
+            <if test="end != null">
+                end = #{end},
+            </if>
+            <if test="company != null">
+                company = #{company},
+            </if>
+            <if test="job != null">
+                job = #{job},
+            </if>
+        </set>
+        where emp_id = #{empId}
+    </update>
+
+    <!--
+        根据员工ID删除员工表达式记录
+        @param empId 员工ID
+        @return 受影响的行数
+    -->
+    <delete id="deleteByEmpId">
+        delete from emp_expr
+        where emp_id = #{empId}
+    </delete>
+
 </mapper>

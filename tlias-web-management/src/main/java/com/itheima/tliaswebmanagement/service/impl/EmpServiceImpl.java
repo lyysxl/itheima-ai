@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -86,8 +87,10 @@ public class EmpServiceImpl implements EmpService {
             empLogService.insertLog(empLog);
         }
     }
+
     /**
      * 根据员工ID查询员工信息及其表达式列表
+     *
      * @param empId 员工ID
      * @return 员工信息对象，包含员工基本信息和表达式列表
      */
@@ -102,5 +105,25 @@ public class EmpServiceImpl implements EmpService {
         return emp;
     }
 
+    /**
+     * 更新员工信息
+     *
+     * @param emp 需要更新的员工对象，包含更新后的员工信息
+     * @return 更新操作影响的记录数，返回0表示没有记录被更新
+     */
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public int update(Emp emp) {
+        emp.setUpdateTime(LocalDateTime.now());
+        List<EmpExpr> exprList = emp.getExprList();
+        if(!CollectionUtils.isEmpty(exprList)) {
+            empExprMapper.deleteByEmpId(emp.getId());
+            exprList.forEach(expr -> {
+                expr.setEmpId(emp.getId());
+            });
+            empExprMapper.insertBatch(exprList);
+        }
+        return empMapper.update(emp);
+    }
 }
 

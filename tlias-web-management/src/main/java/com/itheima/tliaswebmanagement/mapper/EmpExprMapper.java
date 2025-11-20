@@ -27,4 +27,18 @@ public interface EmpExprMapper {
      */
     List<EmpExpr> selectByEmpId(Integer empId);
 
+    /**
+     * 根据ID更新员工表达式信息
+     *
+     * @param empExpr 员工表达式对象，包含要更新的员工信息
+     */
+    void updateById(EmpExpr empExpr);
+
+    /**
+     * 根据员工ID删除员工记录
+     *
+     * @param id 员工ID，用于标识要删除的员工记录
+     */
+    void deleteByEmpId(Integer id);
+
 }

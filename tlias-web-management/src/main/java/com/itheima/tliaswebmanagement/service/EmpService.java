@@ -43,4 +43,12 @@ public interface EmpService {
      */
     Emp selectById(Integer empId);
 
+    /**
+     * 更新员工信息
+     *
+     * @param emp 需要更新的员工对象，包含更新后的员工信息
+     * @return 返回更新操作影响的记录数，通常为1表示更新成功，0表示更新失败
+     */
+    int update(Emp emp);
+
 }

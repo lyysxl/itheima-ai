@@ -81,4 +81,16 @@ public class EmpController {
         return Result.success(emp);
     }
 
+    /**
+     * 更新员工信息
+     * @param emp 员工信息对象，包含要更新的员工数据
+     * @return Result 操作结果，成功时返回成功状态，失败时返回错误信息
+     */
+    @PutMapping
+    public Result update(@RequestBody Emp emp) {
+        log.info("执行更新员工信息操作，员工信息：{}", emp);
+        // 调用服务层更新员工信息，根据返回结果判断操作是否成功
+        return empService.update(emp) > 0 ? Result.success() : Result.error("更新失败");
+    }
+
 }
