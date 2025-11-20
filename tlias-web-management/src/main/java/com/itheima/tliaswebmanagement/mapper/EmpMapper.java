@@ -3,6 +3,7 @@ package com.itheima.tliaswebmanagement.mapper;
 import com.itheima.tliaswebmanagement.pojo.Emp;
 import com.itheima.tliaswebmanagement.pojo.EmpQueryParam;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,6 +30,26 @@ public interface EmpMapper {
      */
     List<Emp> list(Integer start, Integer pageSize);
 
+    /**
+     * 分页查询员工信息列表
+     * @param empQueryParam 员工查询参数对象，包含分页信息和查询条件
+     * @return 返回符合查询条件的员工信息列表
+     */
     List<Emp> listPageHelper(EmpQueryParam empQueryParam);
+
+    /**
+     * 根据ID列表批量删除员工信息
+     * @param ids 要删除的员工ID列表
+     */
+    Integer delete(List<Integer> ids);
+
+    /**
+     * 插入员工信息
+     * @param emp 员工对象，包含员工的基本信息
+     * @return 返回插入操作影响的记录数，通常为1表示插入成功，0表示插入失败
+     */
+    int insert(Emp emp);
+
 }
+
 

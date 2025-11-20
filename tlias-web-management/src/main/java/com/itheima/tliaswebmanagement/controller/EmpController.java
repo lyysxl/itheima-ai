@@ -7,9 +7,9 @@ import com.itheima.tliaswebmanagement.pojo.Result;
 import com.itheima.tliaswebmanagement.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 员工管理控制器类
@@ -36,4 +36,27 @@ public class EmpController {
         return Result.success(pageResult);
     }
 
+    /**
+     * 批量删除员工信息
+     *
+     * @param ids 要删除的员工ID列表
+     * @return 删除结果，包含成功删除的记录数
+     */
+    @DeleteMapping
+    public Result delete(@RequestParam("ids") List<Integer> ids) {
+        // 记录批量删除员工操作日志
+        log.info("执行批量删除员工操作，员工ID：{}", ids);
+
+        // 调用服务层执行删除操作
+        Integer count = empService.delete(ids);
+
+        // 返回删除成功的结果
+        return Result.success(count);
+    }
+
+    @PostMapping
+    public Result save(@RequestBody Emp emp) {
+        log.info("执行保存员工信息操作，员工信息：{}", emp);
+        return empService.insert(emp) > 0 ? Result.success() : Result.error("添加失败");
+    }
 }

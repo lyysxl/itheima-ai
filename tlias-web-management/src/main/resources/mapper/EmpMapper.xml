@@ -46,4 +46,21 @@
         order by update_time desc
     </select>
 
+    <!--
+        删除员工记录
+        @param ids 要删除的员工ID列表
+        @return 受影响的记录数
+    -->
+    <delete id="delete">
+        delete from emp where id in
+        <!-- 遍历ID集合，构建IN条件语句 -->
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into emp(username, password, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time)
+        values(#{username}, #{password}, #{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})
+    </insert>
 </mapper>
