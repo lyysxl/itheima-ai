@@ -93,10 +93,17 @@ public class EmpController {
         return empService.update(emp) > 0 ? Result.success() : Result.error("更新失败");
     }
 
+    /**
+     * 查询所有员工信息列表
+     *
+     * @return Result 包含员工列表的统一响应结果
+     */
     @GetMapping("/list")
     public Result list() {
         log.info("查询所有员工信息");
+        // 查询所有员工信息
         List<Emp> empList = empService.selectAll();
         return Result.success(empList);
     }
+
 }

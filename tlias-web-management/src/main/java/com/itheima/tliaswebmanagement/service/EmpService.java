@@ -50,6 +50,10 @@ public interface EmpService {
      * @return 返回更新操作影响的记录数，通常为1表示更新成功，0表示更新失败
      */
     int update(Emp emp);
-
+    /**
+     * 查询所有员工信息
+     *
+     * @return 包含所有员工信息的列表，如果无数据则返回空列表
+     */
     List<Emp> selectAll();
 }

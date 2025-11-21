@@ -126,9 +126,15 @@ public class EmpServiceImpl implements EmpService {
         return empMapper.update(emp);
     }
 
+    /**
+     * 查询所有员工信息
+     *
+     * @return 员工信息列表，如果没有任何员工则返回空列表
+     */
     @Override
     public List<Emp> selectAll() {
         return empMapper.selectAll();
     }
+
 }
 
