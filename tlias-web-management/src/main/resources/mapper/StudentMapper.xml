@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itheima.tliaswebmanagement.mapper.StudentMapper">
+
+    <!--
+        根据查询参数选择学生信息列表
+
+        @param name 学生姓名，可为空，支持模糊查询
+        @param degree 学位，可为空
+        @param clazzId 班级ID，可为空
+        @return 返回符合条件的学生信息列表
+    -->
+    <select id="selectByQueryParam" resultType="com.itheima.tliaswebmanagement.pojo.Student">
+        SELECT
+            s.id,
+            s.name,
+            s.no,
+            s.gender,
+            s.phone,
+            s.id_card,
+            s.is_college,
+            s.address,
+            s.degree,
+            s.graduation_date,
+            s.clazz_id,
+            s.violation_count,
+            s.violation_score,
+            s.create_time,
+            s.update_time,
+            c.name clazz_name
+        FROM student s
+        LEFT JOIN clazz c ON s.clazz_id = c.id
+        <where>
+            <if test="name != null and name != ''">
+                AND s.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="degree != null">
+                AND s.degree = #{degree}
+            </if>
+            <if test="clazzId != null">
+                AND s.clazz_id = #{clazzId}
+            </if>
+        </where>
+    </select>
+    <!--
+        批量删除学生记录
+        @param ids 学生ID集合，用于指定要删除的学生记录
+        @return 受影响的记录数
+    -->
+    <delete id="deleteBatchByIds">
+        DELETE FROM student WHERE id IN
+        <!-- 遍历ID集合，构建IN条件语句 -->
+        <foreach item="id" collection="ids" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--
+        插入学生信息到数据库
+        @param name 学生姓名
+        @param no 学号
+        @param gender 性别
+        @param phone 电话号码
+        @param degree 学位
+        @param clazzId 班级ID
+        @param idCard 身份证号（可选）
+        @param isCollege 是否为大学生（可选）
+        @param address 地址（可选）
+        @param graduationDate 毕业日期（可选）
+        @return 插入记录的主键ID
+    -->
+    <insert id="insert">
+        insert into student(
+            name, no, gender, phone, degree, create_time, update_time
+            <!-- 根据条件动态插入可选字段 -->
+            <if test="clazzId != null">
+                , clazz_id
+            </if>
+            <if test="idCard != null">
+                , id_card
+            </if>
+            <if test="isCollege != null">
+                , is_college
+            </if>
+            <if test="address != null">
+                , address
+            </if>
+            <if test="graduationDate != null">
+                , graduation_date
+            </if>
+        ) values(
+            #{name}, #{no}, #{gender}, #{phone}, #{degree}, #{createTime}, #{updateTime}
+            <!-- 根据条件动态插入可选字段的值 -->
+            <if test="clazzId != null">
+                , #{clazzId}
+            </if>
+            <if test="idCard != null">
+                , #{idCard}
+            </if>
+            <if test="isCollege != null">
+                , #{isCollege}
+            </if>
+            <if test="address != null">
+                , #{address}
+            </if>
+            <if test="graduationDate != null">
+                , #{graduationDate}
+            </if>
+        )
+    </insert>
+
+    <!--
+        根据ID查询学生信息
+        @param id 学生ID
+        @return Student 学生对象
+    -->
+    <select id="selectById" resultType="com.itheima.tliaswebmanagement.pojo.Student">
+        <!-- 查询student表中的所有字段信息 -->
+        SELECT
+            id,
+            name,
+            no,
+            gender,
+            phone,
+            id_card,
+            is_college,
+            address,
+            degree,
+            graduation_date,
+            clazz_id,
+            violation_count,
+            violation_score,
+            create_time,
+            update_time
+        FROM student
+        <!-- 根据主键ID进行精确查询 -->
+        WHERE id = #{id}
+    </select>
+
+
+    <!--
+        更新学生信息
+        @param id 学生ID，用于定位要更新的记录
+        @param name 学生姓名，可选
+        @param no 学号，可选
+        @param gender 性别，可选
+        @param phone 电话号码，可选
+        @param idCard 身份证号，可选
+        @param isCollege 是否为大学生，可选
+        @param address 地址，可选
+        @param degree 学位，可选
+        @param graduationDate 毕业日期，可选
+        @param clazzId 班级ID，可选
+        @param updateTime 更新时间，必填
+    -->
+    <update id="update">
+        UPDATE student
+        <!-- 根据条件动态设置字段值 -->
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="no != null">
+                no = #{no},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="idCard != null">
+                id_card = #{idCard},
+            </if>
+            <if test="isCollege != null">
+                is_college = #{isCollege},
+            </if>
+            <if test="address != null">
+                address = #{address},
+            </if>
+            <if test="degree != null">
+                degree = #{degree},
+            </if>
+            <if test="graduationDate != null">
+                graduation_date = #{graduationDate},
+            </if>
+            <if test="clazzId != null">
+                clazz_id = #{clazzId},
+            </if>
+            update_time = #{updateTime}
+        </set>
+        WHERE id = #{id}
+    </update>
+    <!--
+        更新学生违规信息
+        @param id 学生ID
+        @param score 违规分数
+        @return 受影响的记录数
+    -->
+    <update id="updateViolation">
+        <!-- 增加学生的违规次数和违规分数 -->
+        UPDATE student
+        SET violation_count = violation_count + 1,
+            violation_score = violation_score + #{score}
+        WHERE id = #{id}
+    </update>
+
+</mapper>
