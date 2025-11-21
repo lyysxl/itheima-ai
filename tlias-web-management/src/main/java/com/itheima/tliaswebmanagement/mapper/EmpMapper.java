@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Options;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 员工数据访问层接口
@@ -69,7 +70,30 @@ public interface EmpMapper {
      */
     int update(Emp emp);
 
+    /**
+     * 查询所有员工信息
+     * @return 员工对象列表
+     */
     List<Emp> selectAll();
+
+    /**
+     * 统计员工性别数据
+     * @return 包含性别统计信息的Map列表，每个Map包含性别类型和对应数量
+     */
+    List<Map<String, Object>> countEmpGenderData();
+
+    /**
+     * 统计员工职位数据
+     * @return 包含职位统计信息的Map列表，每个Map包含职位名称和对应数量
+     */
+    List<Map<String, Object>> countEmpJobData();
+
+    /**
+     * 查询学生学历数据
+     * @return 包含学生学历信息的Map列表，每个Map包含学历层次和对应数据
+     */
+    List<Map<String, Object>> selStudentDegreeData();
+
 }
 
 

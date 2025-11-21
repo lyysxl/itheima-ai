@@ -137,4 +137,23 @@
     <select id="selectAll" resultType="com.itheima.tliaswebmanagement.pojo.Clazz">
         select id, name, room, begin_date, end_date, master_id, subject, create_time, update_time from clazz
     </select>
+
+    <!--
+     * 查询学生数量统计信息
+     *
+     * @param 无参数
+     * @return java.util.Map 返回包含班级名称和对应学生数量的映射集合
+     *         key: 班级名称(如果班级名称为空则显示"无班级")
+     *         value: 该班级的学生数量
+     -->
+    <!--
+     * SQL逻辑说明：
+     * 1. 使用right join确保所有学生都被统计，即使没有分配班级
+     * 2. 当班级名称为null时，显示默认值"无班级"
+     * 3. 按班级名称分组统计学生数量
+     -->
+    <select id="selStudentCountData" resultType="java.util.Map">
+        select (case when c.name is null then '无班级' else c.name end) name, count(1) value from clazz c right join student s on c.id = s.clazz_id group by c.name
+    </select>
+
 </mapper>

@@ -144,8 +144,58 @@
         where id = #{id}
     </update>
 
+    <!--
+        查询所有员工信息
+        @return List<Emp> 员工对象列表
+    -->
     <select id="selectAll" resultType="com.itheima.tliaswebmanagement.pojo.Emp">
         select id, username, password, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time from emp
     </select>
+
+    <!--
+        统计男女员工数量
+        @return List<Map<String,Object>> 包含员工性别统计信息的列表，每个Map包含name(性别描述)和value(人数)两个键值对
+    -->
+    <select id="countEmpGenderData" resultType="java.util.Map">
+        select (case when gender = '1' then '男性员工' else '女性员工' end) as name , count(*) as value from emp group by gender
+    </select>
+
+    <!--
+        函数名称: countEmpJobData
+        函数描述: 统计不同职位的员工数量
+        返回值: java.util.Map 集合，每个Map包含两个键值对：
+                - pos: 职位名称（班主任、讲师、学工主管、教研主管、咨询师或其他）
+                - num: 对应职位的员工数量
+    -->
+    <select id="countEmpJobData" resultType="java.util.Map">
+        select
+            <!-- 根据job字段值转换为对应的职位名称 -->
+            (case when job=1 then '班主任'
+                  when job=2 then '讲师'
+                  when job=3 then '学工主管'
+                  when job=4 then '教研主管'
+                  when job=5 then '咨询师'
+                  else '其他' end) pos,
+            count(*) num
+        from emp
+        group by job
+        order by num
+    </select>
+    <!--
+        函数名称: selStudentDegreeData
+        函数描述: 查询学生学历分布统计数据
+        返回值: java.util.Map 集合，每个Map包含学历名称(name)和对应人数(value)
+        参数说明: 无参数
+    -->
+    <select id="selStudentDegreeData" resultType="java.util.Map">
+        <!-- 根据degree字段值进行分组统计，将数字编码转换为对应的学历中文名称 -->
+        select (case when degree=1 then '高中'
+                     when degree=2 then '本科'
+                     when degree=3 then '研究生'
+                     when degree=4 then '大专'
+                     when degree=5 then '硕士'
+                     else '其他' end) name, count(1) value from student group by degree
+    </select>
+
 
 </mapper>
