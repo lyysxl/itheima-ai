@@ -83,10 +83,18 @@ public class StudentServiceImpl implements StudentService {
         return studentMapper.update(student);
     }
 
+    /**
+     * 更新违规记录
+     *
+     * @param id 违规记录ID
+     * @param score 违规扣分分数
+     * @return 更新影响的记录数
+     */
     @Override
     public int updateViolation(Integer id, Short score) {
         return studentMapper.updateViolation(id, score);
     }
+
 
 
 }
