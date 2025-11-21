@@ -60,8 +60,15 @@ public class ReportController {
         return Result.success(reportService.getStudentDegreeData());
     }
 
+    /**
+     * 获取学生统计数据
+     *
+     * @return Result 包含学生统计数据的统一响应结果
+     */
     @GetMapping("/studentCountData")
     public Result studentCountData() {
+        // 调用报表服务获取学生统计数据并返回成功结果
         return Result.success(reportService.getStudentCountData());
     }
+
 }
