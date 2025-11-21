@@ -144,4 +144,8 @@
         where id = #{id}
     </update>
 
+    <select id="selectAll" resultType="com.itheima.tliaswebmanagement.pojo.Emp">
+        select id, username, password, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time from emp
+    </select>
+
 </mapper>

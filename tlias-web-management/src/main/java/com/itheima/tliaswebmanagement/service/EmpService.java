@@ -51,4 +51,5 @@ public interface EmpService {
      */
     int update(Emp emp);
 
+    List<Emp> selectAll();
 }

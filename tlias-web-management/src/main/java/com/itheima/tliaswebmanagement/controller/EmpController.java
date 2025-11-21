@@ -93,4 +93,10 @@ public class EmpController {
         return empService.update(emp) > 0 ? Result.success() : Result.error("更新失败");
     }
 
+    @GetMapping("/list")
+    public Result list() {
+        log.info("查询所有员工信息");
+        List<Emp> empList = empService.selectAll();
+        return Result.success(empList);
+    }
 }

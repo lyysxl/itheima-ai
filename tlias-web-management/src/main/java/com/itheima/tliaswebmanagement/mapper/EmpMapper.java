@@ -69,6 +69,7 @@ public interface EmpMapper {
      */
     int update(Emp emp);
 
+    List<Emp> selectAll();
 }
 
 
