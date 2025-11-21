@@ -8,12 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+/**
+ * 部门管理控制器类
+ * 提供部门信息的增删改查接口
+ */
 @Slf4j
 @RestController
 public class DeptController {
     @Autowired
     private DeptService deptService;
 
+    /**
+     * 查询所有部门信息
+     * @return 返回包含所有部门信息的结果对象
+     */
     @GetMapping("/depts")
     public Result list() {
         log.info("执行查询所有部门信息操作");
@@ -22,6 +30,11 @@ public class DeptController {
         return Result.success(list);
     }
 
+    /**
+     * 根据部门ID删除部门信息
+     * @param deptId 部门ID
+     * @return 返回删除成功的记录数
+     */
     @DeleteMapping("/depts")
     public Result delete(@RequestParam("id") Integer deptId) {
         log.info("执行删除部门信息操作，部门ID: {}", deptId);
@@ -30,6 +43,11 @@ public class DeptController {
         return Result.success(count);
     }
 
+    /**
+     * 新增部门信息
+     * @param dept 部门对象，包含要新增的部门信息
+     * @return 返回新增成功的记录数
+     */
     @PostMapping("/depts")
     public Result insert(@RequestBody Dept dept) {
         log.info("执行新增部门信息操作，部门名称: {}", dept.getName());
@@ -38,6 +56,11 @@ public class DeptController {
         return Result.success(count);
     }
 
+    /**
+     * 根据部门ID查询部门详情
+     * @param deptId 部门ID
+     * @return 返回指定部门ID的部门信息
+     */
     @GetMapping("/depts/{id}")
     public Result selectById(@PathVariable("id") Integer deptId) {
         log.info("执行根据ID查询部门详情操作，部门ID: {}", deptId);
@@ -46,6 +69,11 @@ public class DeptController {
         return Result.success(dept);
     }
 
+    /**
+     * 更新部门信息
+     * @param dept 部门对象，包含要更新的部门信息
+     * @return 返回更新成功的记录数
+     */
     @PutMapping("/depts")
     public Result update(@RequestBody Dept dept) {
         log.info("执行更新部门信息操作，部门ID: {}, 部门名称: {}", dept.getId(), dept.getName());
@@ -54,3 +82,4 @@ public class DeptController {
         return Result.success(count);
     }
 }
+
