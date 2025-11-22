@@ -1,6 +1,5 @@
 package com.itheima.tliaswebmanagement.filter;
 
-import com.itheima.tliaswebmanagement.exception.BusinessException;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +11,7 @@ import java.io.IOException;
  * 用于拦截所有请求并进行处理
  */
 @Slf4j
-@WebFilter(urlPatterns = "/*")
+//@WebFilter(urlPatterns = "/*")
 public class DemoFilter implements Filter {
 
     /**

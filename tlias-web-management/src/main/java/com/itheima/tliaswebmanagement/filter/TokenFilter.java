@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Slf4j
-@WebFilter(urlPatterns = "/*")
-@Component
+//@WebFilter(urlPatterns = "/*")
+//@Component
 public class TokenFilter implements Filter {
-    @Autowired
+//    @Autowired
     private JwtUtils jwtUtils;
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
