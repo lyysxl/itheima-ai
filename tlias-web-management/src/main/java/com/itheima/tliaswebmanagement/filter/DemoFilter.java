@@ -36,12 +36,6 @@ public class DemoFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         log.info("执行过滤逻辑：{}", this.getClass().getName());
-
-        // 抛出业务异常，模拟服务器繁忙情况
-        if (true) {
-            throw new BusinessException("500" + "服务器忙");
-        }
-
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
