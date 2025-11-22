@@ -8,6 +8,7 @@ import com.itheima.tliaswebmanagement.mapper.EmpMapper;
 import com.itheima.tliaswebmanagement.pojo.*;
 import com.itheima.tliaswebmanagement.service.EmpLogService;
 import com.itheima.tliaswebmanagement.service.EmpService;
+import com.itheima.tliaswebmanagement.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,9 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 员工服务实现类
@@ -28,7 +31,8 @@ public class EmpServiceImpl implements EmpService {
     private EmpExprMapper empExprMapper;
     @Autowired
     private EmpLogService empLogService;
-
+    @Autowired
+    private JwtUtils jwtUtils;
     /**
      * 分页查询员工列表
      *
@@ -150,8 +154,12 @@ public class EmpServiceImpl implements EmpService {
             return null;
 
         }
+        Map<String, Object> data = new HashMap<>();
+        data.put("id", emp.getId());
+        data.put("username", emp.getUsername());
+        data.put("name", emp.getName());
         // 构造并返回登录信息对象
-        return new LoginInfo(emp.getId(), emp.getUsername(), emp.getName(), "token");
+        return new LoginInfo(emp.getId(), emp.getUsername(), emp.getName(), jwtUtils.generateJwt(data));
     }
 
 

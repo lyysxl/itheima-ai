@@ -45,3 +45,7 @@ aliyun:
     endpoint: https://oss-cn-beijing.aliyuncs.com
     bucketName: itheima-web-ai
     region: cn-beijing
+
+jwt:
+  secret: itheima
+  expiration: 3600000
