@@ -2,6 +2,7 @@ package com.itheima.tliaswebmanagement.service;
 
 import com.itheima.tliaswebmanagement.pojo.Emp;
 import com.itheima.tliaswebmanagement.pojo.EmpQueryParam;
+import com.itheima.tliaswebmanagement.pojo.LoginInfo;
 import com.itheima.tliaswebmanagement.pojo.PageResult;
 
 import java.util.List;
@@ -56,4 +57,12 @@ public interface EmpService {
      * @return 包含所有员工信息的列表，如果无数据则返回空列表
      */
     List<Emp> selectAll();
+
+    /**
+     * 用户登录功能
+     * @param emp 员工信息对象，包含登录所需的用户名和密码等信息
+     * @return LoginInfo 登录成功后返回的登录信息对象，包含用户权限、会话令牌等登录相关数据
+     */
+    LoginInfo login(Emp emp);
+
 }

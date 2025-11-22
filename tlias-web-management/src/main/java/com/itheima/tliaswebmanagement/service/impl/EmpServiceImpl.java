@@ -116,7 +116,7 @@ public class EmpServiceImpl implements EmpService {
     public int update(Emp emp) {
         emp.setUpdateTime(LocalDateTime.now());
         List<EmpExpr> exprList = emp.getExprList();
-        if(!CollectionUtils.isEmpty(exprList)) {
+        if (!CollectionUtils.isEmpty(exprList)) {
             empExprMapper.deleteByEmpId(emp.getId());
             exprList.forEach(expr -> {
                 expr.setEmpId(emp.getId());
@@ -135,6 +135,25 @@ public class EmpServiceImpl implements EmpService {
     public List<Emp> selectAll() {
         return empMapper.selectAll();
     }
+
+    /**
+     * 执行登录操作
+     *
+     * @param emp 包含用户名和密码的员工对象
+     * @return 登录信息对象，如果登录失败则返回null
+     */
+    @Override
+    public LoginInfo login(Emp emp) {
+        // 根据用户名和密码查询员工信息
+        emp = empMapper.selectByUserNameAndPassword(emp);
+        if(emp == null) {
+            return null;
+
+        }
+        // 构造并返回登录信息对象
+        return new LoginInfo(emp.getId(), emp.getUsername(), emp.getName(), "token");
+    }
+
 
 }
 

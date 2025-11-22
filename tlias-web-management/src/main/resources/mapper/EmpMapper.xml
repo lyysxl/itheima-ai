@@ -197,5 +197,16 @@
                      else '其他' end) name, count(1) value from student group by degree
     </select>
 
+    <!--
+        根据用户名和密码查询员工信息
+        @param username 用户名
+        @param password 密码
+        @return 返回匹配的员工对象，包含员工的完整信息
+    -->
+    <select id="selectByUserNameAndPassword" resultType="com.itheima.tliaswebmanagement.pojo.Emp">
+        select id, username, password, name, gender, phone, job, salary, image, entry_date, dept_id, create_time, update_time from emp where username = #{username} and password = #{password}
+    </select>
+
+
 
 </mapper>

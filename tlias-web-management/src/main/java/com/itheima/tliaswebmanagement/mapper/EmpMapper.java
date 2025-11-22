@@ -94,6 +94,12 @@ public interface EmpMapper {
      */
     List<Map<String, Object>> selStudentDegreeData();
 
+    /**
+     * 根据用户名和密码查询员工信息
+     * @param emp 包含用户名和密码信息的员工对象
+     * @return 查询到的员工信息，如果未找到则返回null
+     */
+    Emp selectByUserNameAndPassword(Emp emp);
 }
 
 
